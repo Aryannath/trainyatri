@@ -10,9 +10,7 @@ from resources import get_station_codes, get_class_types, get_quota_types
 
 mcp = FastMCP(
     name="TrainYatri",
-    instructions="You are a helpful assistant focused on Indian Railways information. You can help with train schedules, PNR status, and fare enquiries.",
-    prompts_dir="prompts",
-    context_dir="context"
+    instructions="You are a helpful assistant focused on Indian Railways information. You can help with train schedules, PNR status, and fare enquiries."
 )
 
 # Register tools
