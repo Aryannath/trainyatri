@@ -1,4 +1,6 @@
+from fastmcp import Context
 
-def get_train_schedule(train_no: str) -> str:
-    return f"Mocked train schedule for train {train_no}"
+async def get_train_schedule(train_no: str, ctx: Context) -> str:
+    station_data = await ctx.read_resource("data://stations")
+    return f"Mocked schedule for train {train_no}"
 

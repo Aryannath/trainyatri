@@ -1,15 +1,17 @@
 from fastmcp import FastMCP
 from tools.pnr_status import get_pnr_status
 from tools.fare_enquiry import get_fare
-from models.openrouter import model_client
 from tools.seat_availability import check_seat_availability
 from tools.train_schedule import get_train_schedule
 from tools.live_status import get_live_status
-
+from prompts import default_prompt, error_prompt, fallback_prompt
+from resources import get_station_codes, get_class_types, get_quota_types
 
 mcp = FastMCP(
     name="TrainYatri",
-    instructions="You are TrainYatri, an Indian Railways assistant. Help users with train and PNR queries.",
+    instructions="You are a helpful assistant focused on Indian Railways information. You can help with train schedules, PNR status, and fare enquiries.",
+    prompts_dir="prompts",
+    context_dir="context"
 )
 
 # Register tools
@@ -36,5 +38,27 @@ mcp.tool(
     description="Gets live running status for a train on a given date"
 )(get_live_status)
 
+# Register prompts
+mcp.prompt(
+    name="default_prompt",
+    description="Default system prompt for TrainYatri"
+)(default_prompt)
+mcp.prompt(
+    name="error_prompt",
+    description="Generates error message based on error type"
+)(error_prompt)
+mcp.prompt(
+    name="fallback_prompt",
+    description="Fallback message when request cannot be handled"
+)(fallback_prompt)
+
+# Register resources
+mcp.resource("data://stations")(get_station_codes)
+mcp.resource("data://class_types")(get_class_types)
+mcp.resource("data://quota_types")(get_quota_types)
+
+# if __name__ == "__main__":
+#     mcp.run(transport="stdio")
+
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    mcp.run(transport="sse", host="127.0.0.1", port=8000)
