@@ -4,6 +4,7 @@ from tools.fare_enquiry import get_fare
 from tools.seat_availability import check_seat_availability
 from tools.train_schedule import get_train_schedule
 from tools.live_status import get_live_status
+from tools.station_search import search_station
 from prompts import default_prompt, error_prompt, fallback_prompt
 from resources import get_station_codes, get_class_types, get_quota_types
 
@@ -35,8 +36,13 @@ mcp.tool(
 
 mcp.tool(
     name="get_live_status",
-    description="Gets live running status for a train on a given date"
+    description="Gets live running status for a Station"
 )(get_live_status)
+
+mcp.tool(
+    name="search_station",
+    description="Searches for stations by name or code"
+)(search_station)
 
 # Register prompts
 mcp.prompt(
