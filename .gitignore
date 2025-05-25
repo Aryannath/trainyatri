@@ -1,0 +1,16 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Environment variables
+.env
+
+# macOS system files
+.DS_Store
+
+# Ignore pycache in tools folder
+tools/__pycache__/
+
+# Ignore pycache in models folder
+models/__pycache__/

@@ -1,0 +1,10 @@
+
+{
+    "servers": {
+        "TrainYatri": {
+            "type": "stdio",
+            "command": "/usr/local/bin/python3",
+            "args": ["/Users/aryan/Desktop/trainyatri/main.py"]
+        }
+    }
+}
