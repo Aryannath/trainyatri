@@ -4,18 +4,14 @@ from typing import List, Dict, Any
 
 async def get_live_station_status(station_code: str, hours: int, ctx: Context):
    
-    # Get API key from context
     api_key = ctx.read_resource("data://rail_api_key")
     
-    # Construct API URL
     url = f"http://indianrailapi.com/api/v2/LiveStation/apikey/{api_key}/StationCode/{station_code}/hours/{hours}/"
 
     try:
-        # Make API request
         response = requests.get(url, timeout=10)
         data = response.json()
 
-        # Check if request was successful
         if data.get("ResponseCode") == "200" and data.get("Status") == "SUCCESS":
             result = []
             trains = data.get("Trains", [])
@@ -50,7 +46,7 @@ async def get_live_station_status(station_code: str, hours: int, ctx: Context):
             "message": f"API Error: {data.get('Message', 'Unknown error')}"
         }]
 
-    except requests.RequestException as e:
+    except Exception as e:
         return [{
             "type": "error",
             "message": f"Error fetching station status: {str(e)}"

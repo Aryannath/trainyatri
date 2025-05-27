@@ -2,19 +2,17 @@ import requests
 from fastmcp import Context
 
 
-async def search_station(station_name: str, ctx: Context) -> str:
-    # Retrieve the API key from the context configuration
+async def search_station(station_name: str, ctx: Context):
+
     api_key = ctx.read_resource("data://rail_api_key")
 
-    # Construct the API URL
     url = f"http://indianrailapi.com/api/v2/AutoCompleteStation/apikey/{api_key}/StationCodeOrName/{station_name}/"
 
     try:
-        # Make the HTTP GET request
+        
         response = requests.get(url)
         data = response.json()
 
-        # Check if the response is successful
         if data.get("ResponseCode") == "200" and data.get("Status") == "SUCCESS":
             stations = data.get("Station", [])
             if not stations:
@@ -40,5 +38,5 @@ async def search_station(station_name: str, ctx: Context) -> str:
         else:
             return f"API returned an error: {data.get('Message', 'Unknown error')}"
 
-    except requests.RequestException as e:
+    except Exception as e:
         return f"An error occurred while fetching station data: {str(e)}"
