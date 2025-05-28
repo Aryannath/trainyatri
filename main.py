@@ -81,8 +81,8 @@ mcp.resource("data://class_types")(get_class_types)
 mcp.resource("data://quota_types")(get_quota_types)
 mcp.resource("config://RAIL_API_KEY")(get_rail_api_key)
 
-# if __name__ == "__main__":
-#     mcp.run(transport="stdio")
-
 if __name__ == "__main__":
-    mcp.run(transport="sse", host="127.0.0.1", port=8000)
+    mcp.run(transport="stdio")
+
+# if __name__ == "__main__":
+#     mcp.run(transport="sse", host="127.0.0.1", port=8000)
