@@ -13,4 +13,4 @@ __pycache__/
 tools/__pycache__/
 
 # Ignore pycache in models folder
-models/__pycache__/
+models/__pycache__/.env
